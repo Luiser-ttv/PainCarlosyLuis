@@ -2,7 +2,10 @@
 
 package codigo;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
 
 
 public class Linea extends Forma{

@@ -45,12 +45,23 @@ public class VentanaPaint extends javax.swing.JFrame {
 
     Spray miSpray = null;
     
+    String texto = "";
+    int Xtex = 0;
+    int Ytex = 0;
+    int tamLetra=50;
+    Escribe _texto = null;
+    
+    Linea recta = null;
+    
+   
+    
     public VentanaPaint() {
 	initComponents();
 	jPanel2.setBackground(colorSeleccionado);
 	jToggleButton1.setSelected(true);
 	inicializaBuffers();
 	jDialog1.setSize(678, 439);
+        jDialog3.setSize(400, 200);
 	FileNameExtensionFilter jpg = new FileNameExtensionFilter("JPG", "jpg");
 	FileNameExtensionFilter png = new FileNameExtensionFilter("PNG", "png");
 	jFileChooser1.setFileFilter(jpg);
@@ -59,6 +70,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 	jMenuItem1.setAction(saveAction);
 	loadAction.putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
 	jMenuItem2.setAction(loadAction);
+        Graphics2D bufferGraphics, bufferGraphics2, jpanelGraphics = null;
     }
 
     private void inicializaBuffers() {
@@ -169,6 +181,10 @@ public class VentanaPaint extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jDialog2 = new javax.swing.JDialog();
         jFileChooser1 = new javax.swing.JFileChooser();
+        jDialog3 = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jButton3 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
@@ -240,6 +256,40 @@ public class VentanaPaint extends javax.swing.JFrame {
         );
 
         jDialog2.getContentPane().add(jFileChooser1, java.awt.BorderLayout.CENTER);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jButton3.setText("OK Boomer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
+        jDialog3.getContentPane().setLayout(jDialog3Layout);
+        jDialog3Layout.setHorizontalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jDialog3Layout.setVerticalGroup(
+            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog3Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(35, 35, 35))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -426,6 +476,11 @@ public class VentanaPaint extends javax.swing.JFrame {
                 jToggleButton7MousePressed(evt);
             }
         });
+        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton7ActionPerformed(evt);
+            }
+        });
 
         jToggleButton8.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
         jToggleButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Spray.png"))); // NOI18N
@@ -475,7 +530,11 @@ public class VentanaPaint extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton11.setText("jToggleButton11");
+        jToggleButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton11ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenu1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -616,10 +675,10 @@ public class VentanaPaint extends javax.swing.JFrame {
                             .addComponent(jToggleButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jToggleButton11))
-                        .addGap(8, 8, 8)
+                            .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -653,10 +712,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 		}
 		break;
                 
-                case 482:
-                miSpray = new Spray(evt.getX(), evt.getY(), colorSeleccionado);
-                miSpray.dibujate(buffer2Graphics, evt.getX(), evt.getY(), jSlider1.getValue());
-            break;
+                
                 
 	    default:
 		// Sobreescribe el lienzo
@@ -670,6 +726,10 @@ public class VentanaPaint extends javax.swing.JFrame {
 		    miForma.dibujate(bufferGraphics, evt.getX(), evt.getY(), new Trazo(jSlider1.getValue(), true));
 		}
 		break;
+                case 482:
+                miSpray = new Spray(evt.getX(), evt.getY(), colorSeleccionado);
+                miSpray.dibujate(bufferGraphics, evt.getX(), evt.getY(), jSlider1.getValue());
+                break;
 	}
 	repaint(0, 0, 1, 1);
     }//GEN-LAST:event_jPanel1MouseDragged
@@ -689,6 +749,9 @@ public class VentanaPaint extends javax.swing.JFrame {
 	    case 5:
 		miForma = new Pentagono(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
 		break;
+            case 2:
+		miForma = new Linea(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
+		break;
 	    case 24:
 		miForma = new Estrella(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
 		break;
@@ -700,16 +763,19 @@ public class VentanaPaint extends javax.swing.JFrame {
 		posLapizX = evt.getX();
 		posLapizY = evt.getY();
 		break;
-	    case 2:
-		miForma = new Linea(evt.getX(), evt.getY(), colorSeleccionado, jCheckBox1.isSelected());
-		break;
+	    
 	    case 254:
 		break;
             case 777:
                 colorSeleccionado = new Color (buffer2.getRGB(evt.getX(), evt.getY()));
                 jPanel2.setBackground(colorSeleccionado);
             break;
-            
+            case 23:
+                Xtex=evt.getX();
+                Ytex=evt.getY();
+                jDialog3.setVisible(true);
+                jDialog3.setLocation(evt.getX(), evt.getY());
+                break;
             
 	}
     }//GEN-LAST:event_jPanel1MousePressed
@@ -725,6 +791,7 @@ public class VentanaPaint extends javax.swing.JFrame {
 	} else {
 	    actualizaBuffers();
 	}
+        
     }//GEN-LAST:event_jPanel1MouseReleased
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
@@ -853,7 +920,8 @@ public class VentanaPaint extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
-        
+    formaSeleccionada = 482;
+    deSelecciona();
                 
                 
     }//GEN-LAST:event_jToggleButton8ActionPerformed
@@ -882,6 +950,27 @@ public class VentanaPaint extends javax.swing.JFrame {
     private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        texto = jTextArea1.getText();
+        jDialog3.setVisible(false);
+        _texto = new Escribe(Xtex, Ytex, texto);
+        _texto.escribe(jPanelGraphics, Xtex, Ytex, texto, colorSeleccionado,tamLetra);
+        _texto.escribe(bufferGraphics, Xtex, Ytex, texto, colorSeleccionado,tamLetra);
+        _texto.escribe(buffer2Graphics, Xtex, Ytex, texto, colorSeleccionado,tamLetra);
+        jPanelGraphics.drawImage(buffer2, 0, 0, null);
+        jTextArea1.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jToggleButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton11ActionPerformed
+        formaSeleccionada = 23;
+        deSelecciona();
+    }//GEN-LAST:event_jToggleButton11ActionPerformed
+
+    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
+       formaSeleccionada = 2;
+       deSelecciona();
+    }//GEN-LAST:event_jToggleButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -921,12 +1010,14 @@ public class VentanaPaint extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JColorChooser jColorChooser1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
+    private javax.swing.JDialog jDialog3;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
@@ -938,8 +1029,10 @@ public class VentanaPaint extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton10;
     private javax.swing.JToggleButton jToggleButton11;
